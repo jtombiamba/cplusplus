@@ -4,7 +4,7 @@
 #include <vector>
 #include <fstream>
 #include "template.h"
-
+#include "Personnage.h"
 
 
 using namespace std; //spécifier le lot dans lequel on travaille (si deux fct identiques dans iostream et string, permet de faire un choix)
@@ -53,46 +53,6 @@ int main(){
 
   string texte_a_lire(" et je fais du sport");  //peut etre considéré comme un tableau aussi 
   string name("No name??");
-
-  // CLASS
-  class Personnage
-  {
-
-    //Attributs
-  private: 
-    int m_vie;
-    int m_mana;
-    string n_nomArme;
-    int m_degatsArme;
-
-    //Methodes
-  public:
-    void recevoirDegats(int nbDegats)
-    {
-
-    }
-
-    void attaquer(Personnage &cible)
-    {
-
-    }
-
-    void boirePotionDeVie(int quantitePotion)
-    {
-
-    }
-
-    void changerArme(string nomNouvelleArme, int degatsNouvelleArme)
-    {
-
-    }
-
-    bool estVivant()
-    {
-
-    }
-
-  };
 
 
 

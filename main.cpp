@@ -178,7 +178,7 @@ int main(){
 
 
   //OBJECT ORIENTED PROGRAMMING
-  Personnage David, Goliath;
+  Personnage David, Goliath(500,50);
 
   Goliath.attaquer(David);
   David.boirePotionDeVie(20);
@@ -187,6 +187,23 @@ int main(){
 
   Goliath.changerArme("Double couteau de la mort qui tue", 50);
   Goliath.attaquer(David);
+
+  //  Goliath = David;
+
+  if(Goliath == David) 
+    cout << "David et Goliath Deux personnages identiques" << endl;
+  else
+    cout << "David et goliath un peu differents quand mm" << endl;
+
+  cout << "D'ailleurs l'arme de Goliath est " << Goliath.getm_nomArme() << " et il coute " << Goliath.getm_degatsArme() ;
+  cout << " En terme de dégats" << endl;
+
+  David+=Goliath;
+
+  cout << "en fusionnant les deux Perso, on obtient" << endl;
+
+  //surcharge d'operateur "<<" réussie, on envoie juste l'objet et on a un affichage customisé 
+  cout << David;
 
   cout << "\n///////////////////////////////////////////////////////////////////////////\n" << endl;
 

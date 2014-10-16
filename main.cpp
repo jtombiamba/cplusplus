@@ -5,7 +5,7 @@
 #include <fstream>
 #include "template.h"
 #include "Personnage.h"
-
+#include "ZFraction.h"
 
 using namespace std; //spécifier le lot dans lequel on travaille (si deux fct identiques dans iostream et string, permet de faire un choix)
 
@@ -205,8 +205,27 @@ int main(){
   //surcharge d'operateur "<<" réussie, on envoie juste l'objet et on a un affichage customisé 
   cout << David;
 
-  cout << "\n///////////////////////////////////////////////////////////////////////////\n" << endl;
+  cout << "\n/////////////ZFRACTION TP////////////////////////////////////////////////////\n" << endl;
 
+  //ZFRACTION TP
+
+  Fraction one(6, 10), two(17, 5), three(10, 5), four(9, 7);
+
+  one.reduce();
+
+  cout << "la Fraction two :" << two <<  " Et la Fraction one :" << one << endl;
+
+  two += three;
+
+  //four += three;
+
+  cout << "La somme de " << four <<  " et de " << three << " donne " << three+four << " reduite a "<< (four+three).reduce() << endl;
+  if(three >= four)
+    cout << "Au fait, " << three << " > = " << four << endl;
+  else
+    cout << "Au fait, " << four << " > = " << three << endl;
+
+  cout << "///////////////////////////////////////////////////////////////////////////////////////////////////////\n" << endl;
 
   return 0;
 

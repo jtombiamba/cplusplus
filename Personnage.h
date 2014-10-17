@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "Arme.h"
 
   // CLASS
   class Personnage
@@ -12,8 +13,7 @@
   private: 
     int m_vie;
     int m_mana;
-    std::string m_nomArme;
-    int m_degatsArme;
+    Arme m_arme;
 
     //Methodes
   public:
@@ -24,25 +24,25 @@
     Personnage(Personnage const& other); // constructeur de copie surchargé
 
     //getters et setters
-    int getm_vie();
-    int getm_mana();
-    std::string getm_nomArme();
-    int getm_degatsArme();
+    int getm_vie() const;
+    int getm_mana() const;
+    Arme getm_arme() const;
 
     void setm_vie(int vie);
     void setm_mana(int mana);
-    void setm_nomArme(std::string nomArme);
-    void setm_degatsArme(int degatsArme);
+    void setm_arme(std::string nomArme, int degatsArme);
 
     void recevoirDegats(int nbDegats);
 
-    void attaquer(Personnage &cible);
+    void attaquer(Personnage& cible);
 
     void boirePotionDeVie(int quantitePotion);
     
-    void changerArme(std::string nomNouvelleArme, int degatsNouvelleArme);
+    void changerArme(std::string nomArme, int degatsArme);   
+    
+    //void changerArme(std::string nomNouvelleArme, int degatsNouvelleArme);
 
-    void afficher(std::ostream &flux) const;
+    void afficher(std::ostream& flux) const;
 
     // Cette surcharge d'operateur "+=" est déclarée dans la classe puisqu'elle va modifier les attributs de
     //l'objet qui l'utilise, donc par encapsulation, elle est insérée dans la classe
@@ -59,6 +59,6 @@
 // surcharge de l'operateur "==" relative à la classe Personnage, utilisation de référence constante pour éviter les copies
 bool operator==(Personnage const& first, Personnage const& second);
 
-std::ostream& operator<< (std::ostream &flux, Personnage const& perso);
+std::ostream& operator<< (std::ostream& flux, Personnage const& perso);
 
 #endif

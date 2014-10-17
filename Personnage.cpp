@@ -1,70 +1,67 @@
 //#include <iostream>
 //#include <string>
 #include "Personnage.h"
+#include "Arme.h"
 
 using namespace std;
 
-Personnage::Personnage():m_vie(100), m_mana(50), m_nomArme("Basic sword"), m_degatsArme(10)
+Personnage::Personnage():m_vie(100), m_mana(50), m_arme()
 {
 
 }
 
-Personnage::Personnage(int vie, int mana):m_vie(vie), m_mana(mana), m_nomArme("Basic sword"), m_degatsArme(10)
+Personnage::Personnage(int vie, int mana):m_vie(vie), m_mana(mana), m_arme()
 {
 
 }
 
-Personnage::Personnage(string nomArme, int degatsArme):m_vie(100), m_mana(50), m_nomArme(nomArme), m_degatsArme(degatsArme)
+Personnage::Personnage(string nomArme, int degatsArme):m_vie(100), m_mana(50), m_arme(nomArme,degatsArme)
 {
 
 }
 
 //constructeur de copie, on accede directement aux attributs de l'objet que l'on veut copier, sans erreur de private
-Personnage::Personnage(Personnage const& other): m_vie(other.m_vie), m_mana(other.m_mana), m_nomArme(other.m_nomArme), m_degatsArme(other.m_degatsArme)
+Personnage::Personnage(Personnage const& other): m_vie(other.m_vie), m_mana(other.m_mana), m_arme(other.m_arme)
 {
 
 }
 
 ///GETTERS
-int Personnage::getm_vie()
+int Personnage::getm_vie() const
 {
   return m_vie;
 }
 
-int Personnage::getm_mana()
+int Personnage::getm_mana() const
 {
   return Personnage::m_mana;
 }
 
-string Personnage::getm_nomArme()
+Arme Personnage::getm_arme() const
 {
-  return Personnage::m_nomArme;
+  return m_arme;
 }
 
-int Personnage::getm_degatsArme()
-{
-  return Personnage::m_degatsArme;
-}
 
 ///SETTERS
 void Personnage::setm_vie(int vie)
 {
   Personnage::m_vie = vie;
 }
+
+
 void Personnage::setm_mana(int mana)
 {
   Personnage::m_mana = mana;
 }
 
-void Personnage::setm_nomArme(string nomArme)
+
+void Personnage::setm_arme(string nomArme, int degatsArme)
 {
-  Personnage::m_nomArme = nomArme;
+  m_arme.setm_nomArme(nomArme);
+  m_arme.setm_degatsArme(degatsArme);
 }
 
-void Personnage::setm_degatsArme(int degatsArme)
-{
-  Personnage::m_degatsArme = degatsArme;
-}
 
 
 //OTHER METHODS
@@ -84,11 +81,12 @@ void Personnage::boirePotionDeVie(int quantitePotion)
 
 }
 
-void Personnage::changerArme(string nomNouvelleArme, int degatsNouvelleArme)
+void Personnage::changerArme(string nomArme, int degatsArme)
 {
-  m_nomArme = nomNouvelleArme;
-  m_degatsArme = degatsNouvelleArme;
-
+  //m_nomArme = nomNouvelleArme;
+  //m_degatsArme = degatsNouvelleArme;
+  //setm_arme(arme.getm_nomArme(), arme.getm_degatsArme());
+  m_arme.changer(nomArme, degatsArme);
 }
 
 // Methode constante,ne modifie pas un attribut de la classe/objet
@@ -125,11 +123,13 @@ Personnage& Personnage::operator+=(const Personnage& second)
 {
   m_vie = m_vie + second.m_vie;
   m_mana = m_mana + second.m_mana;
-  if (m_degatsArme < second.m_degatsArme)
+  if (m_arme.getm_degatsArme() < second.getm_arme().getm_degatsArme())
     {
-      m_degatsArme = second.m_degatsArme;
-      m_nomArme = second.m_nomArme;
+      setm_arme(second.getm_arme().getm_nomArme(),second.getm_arme().getm_degatsArme());
+      //m_arme.setm_degatsArme(second.getm_arme().getm_degatsArme());
+      //m_arme.setm_nomArme(second.getm_nomArme().getm_nomArme());
     } 
+
   return *this;
 
 
@@ -146,8 +146,9 @@ void Personnage::afficher(ostream &flux) const
 {
   flux << "Vie         : " << m_vie << endl;
   flux << "Mana        : " << m_mana << endl;
-  flux << "nom Arme    : " << m_nomArme << endl;
-  flux << "Degats Arme : " << m_degatsArme << endl;
+  flux << m_arme;
+  //flux << "nom Arme    : " << m_nomArme << endl;
+  //flux << "Degats Arme : " << m_degatsArme << endl;
   
 }
 

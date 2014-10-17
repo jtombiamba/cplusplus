@@ -2,6 +2,9 @@
 CXX=g++
 CFLAGS=-c -g
 
+Arme.o: Arme.cpp
+	$(CXX) $(CFLAGS) Arme.cpp -o Arme.o
+
 Personnage.o: Personnage.cpp
 	$(CXX) $(CFLAGS) Personnage.cpp -o Personnage.o	
 
@@ -15,8 +18,8 @@ template.o: template.cpp
 main.o: main.cpp
 	$(CXX) $(CFLAGS) main.cpp -o main.o 
 
-hello: main.o Personnage.o ZFraction.o template.o
-	$(CXX) -o hello Personnage.o ZFraction.o template.o main.o
+hello: main.o Arme.o Personnage.o ZFraction.o template.o
+	$(CXX) -o hello Arme.o Personnage.o ZFraction.o template.o main.o
 
 all: hello
 

@@ -6,6 +6,7 @@
 #include "template.h"
 #include "Personnage.h"
 #include "ZFraction.h"
+#include "Arme.h"
 
 using namespace std; //spécifier le lot dans lequel on travaille (si deux fct identiques dans iostream et string, permet de faire un choix)
 
@@ -195,7 +196,7 @@ int main(){
   else
     cout << "David et goliath un peu differents quand mm" << endl;
 
-  cout << "D'ailleurs l'arme de Goliath est " << Goliath.getm_nomArme() << " et il coute " << Goliath.getm_degatsArme() ;
+  cout << "D'ailleurs l'arme de Goliath est " << Goliath.getm_arme().getm_nomArme() << " et il coute " << Goliath.getm_arme().getm_degatsArme() ;
   cout << " En terme de dégats" << endl;
 
   David+=Goliath;

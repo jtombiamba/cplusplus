@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 #include "template.h"
+#include "Sorcier.h"
 #include "Personnage.h"
 #include "ZFraction.h"
 #include "Arme.h"
@@ -189,6 +190,8 @@ int main(){
   Goliath.changerArme("Double couteau de la mort qui tue", 50);
   Goliath.attaquer(David);
 
+
+  //ce qui suit est un operator=, à ne pas confondre avec le constructeur de copie 
   //  Goliath = David;
 
   if(Goliath == David) 
@@ -196,7 +199,7 @@ int main(){
   else
     cout << "David et goliath un peu differents quand mm" << endl;
 
-  cout << "D'ailleurs l'arme de Goliath est " << Goliath.getm_arme().getm_nomArme() << " et il coute " << Goliath.getm_arme().getm_degatsArme() ;
+  cout << "D'ailleurs l'arme de Goliath est " << Goliath.getm_arme()->getm_nomArme() << " et il coute " << Goliath.getm_arme()->getm_degatsArme() ;
   cout << " En terme de dégats" << endl;
 
   David+=Goliath;
@@ -205,6 +208,15 @@ int main(){
 
   //surcharge d'operateur "<<" réussie, on envoie juste l'objet et on a un affichage customisé 
   cout << David;
+
+
+  // Declaration de classes filles avec affectation de classe mere
+  Sorcier *marabout = new Sorcier();
+  Personnage *perso(0);
+
+  //perso = marabout; // ceci est possible car un Sorcier est un Personnage, et par contre un Personnage peut ne pas etre un sorcier
+
+  cout << *marabout;
 
   cout << "\n/////////////ZFRACTION TP////////////////////////////////////////////////////\n" << endl;
 

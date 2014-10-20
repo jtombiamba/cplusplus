@@ -10,10 +10,11 @@
   {
 
     //Attributs
-  private: 
+    // private: // droit d'accès interessant mais trop restrictif
+  protected: // droit d'accès permettant aux futurs  classes filles de pouvoir accéder à ces attributs facilement 
     int m_vie;
     int m_mana;
-    Arme m_arme;
+    Arme *m_arme;
 
     //Methodes
   public:
@@ -23,10 +24,14 @@
 
     Personnage(Personnage const& other); // constructeur de copie surchargé
 
+    //Si le constructeur de copie est redéfini et qu'il y a des attributs en pointeur
+    //il est impératif de surcharger l'operateur "=" pour s'eviter les problèmes de pointage
+
+
     //getters et setters
     int getm_vie() const;
     int getm_mana() const;
-    Arme getm_arme() const;
+    Arme* getm_arme() const;
 
     void setm_vie(int vie);
     void setm_mana(int mana);
@@ -47,6 +52,10 @@
     // Cette surcharge d'operateur "+=" est déclarée dans la classe puisqu'elle va modifier les attributs de
     //l'objet qui l'utilise, donc par encapsulation, elle est insérée dans la classe
     Personnage& operator+=(Personnage const& second);
+
+    //Cette surcharge d'operateur "=" est déclarée dans la classe puisqu'elle aussi va modifier les attributs et va permettre
+    //de ne pas faire de confusion avec le constructeur de copie
+    Personnage& operator=(Personnage const& other);
 
     bool Equals(Personnage const& second) const;
 

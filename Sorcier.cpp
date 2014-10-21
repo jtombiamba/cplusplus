@@ -19,7 +19,7 @@ int Sorcier::lancerSortilege()
 
 void Sorcier::afficher(ostream& flux) const
 {
-  flux << "Je suis Un grand Sorcier" << endl;
+  flux << "\nSORCIER MAGNIFIQUE\n" << endl;
   //Ici on peut faire du démasquage, en rajoutant la classe qui portait cette méthode auparavant(ici Personnage) 
   Personnage::afficher(flux);
 }

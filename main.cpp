@@ -8,6 +8,11 @@
 #include "Personnage.h"
 #include "ZFraction.h"
 #include "Arme.h"
+#include "Vehicule.h"
+#include "Voiture.h"
+#include "Moto.h"
+
+
 
 using namespace std; //spécifier le lot dans lequel on travaille (si deux fct identiques dans iostream et string, permet de faire un choix)
 
@@ -36,6 +41,11 @@ void echange(int& a, int& b){
   int temporaire(a);  
   a = b;  
   b= temporaire;
+}
+
+void presenter(Vehicule const& vic)
+{
+  vic.affiche();
 }
 
 
@@ -239,6 +249,42 @@ int main(){
     cout << "Au fait, " << four << " > = " << three << endl;
 
   cout << "///////////////////////////////////////////////////////////////////////////////////////////////////////\n" << endl;
+
+  cout << "///////////////////////////////////////////////////////////////////////////////////////////////////////\n" << endl;
+
+  cout << "///////////////////////////////////////////////////////////////////////////////////////////////////////\n" << endl;
+
+  cout << "//////////////////////////////ABSTRACT CLASSES AND POLYMORPHISM//////////////////////////////////////////\n" << endl;
+
+
+  vector<Vehicule*> listeVehicules;
+
+  listeVehicules.push_back(new Voiture(10000, 3));
+  listeVehicules.push_back(new Moto());
+  listeVehicules.push_back(new Voiture());
+
+  Vehicule *vehic(0);
+  //Voiture v1();
+  //Moto m1();
+  for(int i(0); i < listeVehicules.size(); i++)
+    {
+      presenter(*listeVehicules[i]);
+      cout <<  " Nombre de roues: " << listeVehicules[i]->nb_Roues() << endl; 
+    }
+
+  vehic = new Voiture();
+  presenter(*vehic);
+  delete vehic;
+  vehic = 0;
+  //vehic = &m1;
+  vehic = new Moto();
+  presenter(*vehic);
+ 
+
+  cout << "///////////////////////////////////////////////////////////////////////////////////////////////////////\n" << endl;
+
+  cout << "///////////////////////////////////////////////////////////////////////////////////////////////////////\n" << endl;
+
 
   return 0;
 

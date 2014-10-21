@@ -11,7 +11,7 @@ class Sorcier : public Personnage
  public:
   Sorcier();
   int lancerSortilege();
-  void afficher(std::ostream& flux) const;
+  virtual void afficher(std::ostream& flux) const;
   ~Sorcier();
 };
 

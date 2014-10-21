@@ -47,7 +47,7 @@
     
     //void changerArme(std::string nomNouvelleArme, int degatsNouvelleArme);
 
-    void afficher(std::ostream& flux) const;
+    virtual void afficher(std::ostream& flux) const;
 
     // Cette surcharge d'operateur "+=" est déclarée dans la classe puisqu'elle va modifier les attributs de
     //l'objet qui l'utilise, donc par encapsulation, elle est insérée dans la classe

@@ -2,6 +2,7 @@
 #include <string>
 #include <cmath>
 #include <vector>
+#include <map>
 #include <fstream>
 #include "template.h"
 #include "Sorcier.h"
@@ -51,7 +52,7 @@ void presenter(Vehicule const& vic)
 
 //******************************MAIN*****************************//
 
-int main(){
+int main(int argc, char ** argv){
 
   //simple variables
   int age(23);
@@ -284,6 +285,22 @@ int main(){
   cout << "///////////////////////////////////////////////////////////////////////////////////////////////////////\n" << endl;
 
   cout << "///////////////////////////////////////////////////////////////////////////////////////////////////////\n" << endl;
+
+
+  cout << "////////////////////////////////////////////CONTENDERS --- MAP/////////////////////////////////////////////\n" << endl;
+
+  map <string, int> counter;
+
+  ifstream file (argv[1]);
+
+  string word;
+
+  while(file >> word)
+    {
+      ++ counter[word];
+    }
+
+  cout << "In this text, you have " << counter["if"] << " occurrences of \"if \"" << endl;
 
 
   return 0;

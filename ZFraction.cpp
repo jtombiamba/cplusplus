@@ -1,17 +1,25 @@
 #include "ZFraction.h"
 
+//definition du domaine de fonctions qui sera utilisé
 using namespace std;
 
+
+
+//Constructeur par défaut, aucun argument
 Fraction::Fraction():m_num(0), m_den(1)
 {
 
 }
 
 
+
+//Premiere surcharge de constructeur
 Fraction::Fraction(int entier)
 {
 
 }
+
+
 
 Fraction::Fraction(int num, int den):m_num(num), m_den(den)
 {
@@ -24,7 +32,8 @@ Fraction::Fraction(int num, int den):m_num(num), m_den(den)
 }
 
 
-
+//Constructeur de copie, other ne sera pas modifié, donc déclaré en const 
+//et comme on ne veut pas une copie supplémentaire dans la pile de l'objet other, on le référence directement avec &
 Fraction::Fraction(Fraction const& other):m_num(other.m_num), m_den(other.m_den)
 {
 
@@ -32,7 +41,8 @@ Fraction::Fraction(Fraction const& other):m_num(other.m_num), m_den(other.m_den)
 
 
 
-//va modifier les attributs de sa classe 
+//va modifier les attributs de sa classe donc est référencé et return le pointeur sur lui mm *this (de type Fraction)
+//tandis que "this" est de type "Fraction*" qui est une adresse
 Fraction& Fraction::operator+=(Fraction const& other)
 {
   if(m_den == other.m_den)
@@ -105,6 +115,8 @@ Fraction& Fraction::reduce()
 
 
 
+//surcharge de l'operateur "<<" sur une sortie ostream
+//mais étant donné qu'il n'y a qu'une unique instance de ostream qui est créée à chaque lancement du programme, il est directement référencé
 ostream& operator<<(ostream& flux, Fraction const& frac)
 {
   frac.afficher(flux);

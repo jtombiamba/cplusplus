@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <fstream>
+#include <memory> //for shared_ptr
 #include "template.h"
 #include "Sorcier.h"
 #include "Personnage.h"
@@ -44,6 +45,8 @@ void echange(int& a, int& b){
   b= temporaire;
 }
 
+
+//Fonction presenter, appelant la fonction virtuelle affiche des classes fille de vehicule
 void presenter(Vehicule const& vic)
 {
   vic.affiche();
@@ -174,9 +177,12 @@ int main(int argc, char ** argv){
   vector<int> * arrayptr(0);//Useful IMPORTANT: toujours déclarer les pointeurs en initialisant leur valeurs à 0
   arrayptr = new vector<int>;
 
+
+  //REFERENCEMENT DE AGE DANS POINTEUR
   ptr = &age;
 
-  cout << "Address: "  << ptr << " Value: " << *ptr << endl; //déréférencement du pointeur dans *ptr
+  //DEREFERENCEMENT DU POINTEUR dans *ptr
+  cout << "Address: "  << ptr << " Value: " << *ptr << endl; 
   
 
 
@@ -202,7 +208,7 @@ int main(int argc, char ** argv){
   Goliath.attaquer(David);
 
 
-  //ce qui suit est un operator=, à ne pas confondre avec le constructeur de copie 
+  //ce qui suit est un OPERATOR=, à ne pas confondre avec le CONSTRUCTEUR DE COPIE 
   //  Goliath = David;
 
   if(Goliath == David) 
@@ -213,7 +219,7 @@ int main(int argc, char ** argv){
   cout << "D'ailleurs l'arme de Goliath est " << Goliath.getm_arme()->getm_nomArme() << " et il coute " << Goliath.getm_arme()->getm_degatsArme() ;
   cout << " En terme de dégats" << endl;
 
-  David+=Goliath;
+  David+=Goliath; //SURCHARGE DE +=
 
   cout << "en fusionnant les deux Perso, on obtient" << endl;
 
@@ -225,11 +231,17 @@ int main(int argc, char ** argv){
   Sorcier *marabout = new Sorcier();
   Personnage *perso(0);
 
-  //perso = marabout; // ceci est possible car un Sorcier est un Personnage, et par contre un Personnage peut ne pas etre un sorcier
+  //perso = marabout; // CECI EST POSSIBLE car un Sorcier est un Personnage, et par contre un Personnage PEUT NE PAS ETRE un sorcier
 
   cout << *marabout;
 
-  cout << "\n/////////////ZFRACTION TP////////////////////////////////////////////////////\n" << endl;
+  cout << "///////////////////////////////////////////////////////////////////////////////////////////////////////\n" << endl;
+
+  cout << "///////////////////////////////////////////////////////////////////////////////////////////////////////\n" << endl;
+
+  cout << "///////////////////////////////////////////////////////////////////////////////////////////////////////\n" << endl;
+
+  cout << "\n/////////////////////////////////////ZFRACTION TP////////////////////////////////////////////////////\n" << endl;
 
   //ZFRACTION TP
 
@@ -258,26 +270,42 @@ int main(int argc, char ** argv){
   cout << "//////////////////////////////ABSTRACT CLASSES AND POLYMORPHISM//////////////////////////////////////////\n" << endl;
 
 
-  vector<Vehicule*> listeVehicules;
+  std::vector<Vehicule*> listeVehicules;
 
-  listeVehicules.push_back(new Voiture(10000, 3));
-  listeVehicules.push_back(new Moto());
-  listeVehicules.push_back(new Voiture());
+  listeVehicules.push_back( new Voiture(10000, 3));
+  listeVehicules.push_back( new Moto());
+  listeVehicules.push_back( new Voiture());
 
   Vehicule *vehic(0);
-  //Voiture v1();
-  //Moto m1();
-  for(int i(0); i < listeVehicules.size(); i++)
+
+  vector<Vehicule*>::iterator it;
+  
+
+  //La classe Vehicule est abstraite car la méthode nb_Roues est virtuelle pure
+  //la méthode présenter est virtuelle et donc la RESOLUTION DYNAMIQUE se fait avec 
+  //  -- déclaration de la méthode en virtuel
+  //  -- parametre en pointeur ou référence
+
+  //Pour un iterateur, l'operation de comparaison "<" ou "<=" n'est pas optimal, donc il faut utiliser "!="
+  for(it = listeVehicules.begin(); it != listeVehicules.end(); ++it)
     {
-      presenter(*listeVehicules[i]);
-      cout <<  " Nombre de roues: " << listeVehicules[i]->nb_Roues() << endl; 
-    }
+
+      //TRES IMPORTANT: ici "it" est un itérateur sur vector <Vehicule*> donc par retour sur itération, il renvoie un pointeur 
+      //sur "Vehicule*", donc un pointeur sur un pointeur 
+      //Pour avoir la valeur effective, il faut faire un double référencement de pointeur
+      // -- le premier pour avoir le pointeur Vehicule* qui pointe sur un objet vehicule
+      // -- le deuxième pour avoir l'objet Vehicule en lui mm, puisque presenter prend en parametre la référence de l'objet 
+      presenter(*(*it));
+ 
+      cout <<  " Nombre de roues: " << (*it)->nb_Roues() << endl; 
+ 
+   }
 
   vehic = new Voiture();
   presenter(*vehic);
   delete vehic;
   vehic = 0;
-  //vehic = &m1;
+
   vehic = new Moto();
   presenter(*vehic);
  
@@ -300,7 +328,7 @@ int main(int argc, char ** argv){
       ++ counter[word];
     }
 
-  cout << "In this text, you have " << counter["if"] << " occurrences of \"if \"" << endl;
+  cout << "In this text, you have " << counter.size()  << " differents words and  " << counter["for"] << " occurrences of \"for \"" << endl;
 
 
   return 0;

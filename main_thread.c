@@ -64,10 +64,10 @@ void *bubblesort(/*int fd, int n, int x[]*/void * args)
   while(finish!=1)
     {
       finish = 1;
-      for(j = 0; j < my_bub->n - 1; j ++)
+      for (j = 0; j < my_bub->n - 1; j ++)
 	{
 	  m = my_bub->x[j];
-	  for(i = 1; i < my_bub->n; i ++)
+	  for (i = 1; i < my_bub->n; i ++)
 	    {
 	      if(m > my_bub->x[i])
 		{

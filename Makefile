@@ -1,6 +1,6 @@
 
 CXX=g++
-CXXFLAGS=-c -g
+CXXFLAGS=-c -g -std=c++11 -O2
 EXEC=hello
 SRC= $(wildcard *.cpp)
 OBJ= $(SRC: .cpp=.o)
